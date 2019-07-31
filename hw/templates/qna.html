@@ -1,0 +1,30 @@
+<header>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</header>
+
+<body>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col" style="width:20%">Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for blog in blogs.all %}
+                <tr>
+                <th scope="row">{{blog.id}}</th>
+                <td><a href="{%url 'detail' student.name blog.id%}">{{blog.title}}</a></td>
+                <td>{{blog.pub_date}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'new' student.name %}"><button type="button" class="btn btn-primary">글쓰기</button></a>
+        <a href="{% url 'home' student.name %}"><button type="button" class="btn btn-primary">home</button></a>
+    </div>
+</body>

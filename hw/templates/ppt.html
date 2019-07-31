@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ppt</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        @import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            width: 100%;
+
+            margin: 0;
+        }
+
+        /* 여기는 플렉스 박스 로그인 페이지 따라다니기 */
+        .flexbox-header {
+            display: flex;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #navbar {
+            overflow: hidden;
+            background-color: rgb(255,192,0);
+            transition: 0.4s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            height: 20%;
+        }
+
+        #navbar .contents{
+            height:100%;
+        }
+        
+        #navbar .contents #login{
+            height:100%;
+        }
+        #background{
+            width:100%;
+        }
+        #mainlogo{
+            z-index: 100;
+            width:24%;
+            position: relative;
+            padding-top: -5%;
+        }
+        #login{
+            z-index: 100;
+            width:10%;
+            position: relative;
+            float:right;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            #navbar {
+                padding: 20px 10px !important;
+            }
+
+        }
+
+        /* 여기부터 그리드 컨테이너 */
+        .container {
+            background-color: white;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 10fr 1fr;
+            grid-template-areas:
+                "header"
+                "con"
+                "footer";
+
+        }
+
+        /* header 파트 */
+        .header {
+            grid-column: header;
+            width: 100%;
+            background-color: rgb(255,192,0);
+            padding-top: 5%;
+        }
+
+        /* 시간표 파트 */
+
+
+
+        /* 이미지 및 컨텐츠 넣을 곳 */
+        .content {
+            grid-row: con;
+            display: grid;
+            grid-template-columns: 1fr 15fr;
+            grid-template-rows: 1;
+            grid-template-areas:
+                "sidebar container2";
+            height: 100%;
+        }
+        .container2{
+            grid-column: container2;
+
+        }
+
+        /* 마지막 밑 부분 */
+        .footer {
+            grid-column: footer;
+            background-color: black;
+            color: white;
+            border: 1px solid;
+            height: 100%;
+        }
+
+        /* 여기서부터 사이드 바 전체 */
+        .sidebar {
+            grid-column: sidebar;
+            float: left;
+            width: 100%;
+            margin-left: -100%;
+            height: 100%;
+            background: #ff7473;
+            transition: 0.5s;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .side {
+            margin-left: 0px;
+        }
+
+        .sidebar ul {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .sidebar ul li {
+            list-style: none;
+
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            height: auto;
+            width: 100%;
+            font-size: 40px;
+            line-height: 80px;
+            text-align: center;
+            display: block;
+            transition: 0.6s all;
+        }
+
+        .btn {
+            margin-left: 50px;
+            margin-top: 10px;
+            z-index: 2;
+            float: left;
+            padding: 0 10;
+            font-size: 40px;
+            text-decoration: none;
+            color: white;
+            font-family: Ionicons;
+
+        }
+
+        .btn:before {
+            content: '\f20d';
+            z-index: 2;
+        }
+
+        .btnc::before {
+            content: '\f12a';
+            z-index: 2;
+        }
+
+        /* 여기부터 nav바 만드는 곳 */
+
+        .nav {
+            width: 100%;
+            box-sizing: border-box;
+            transition: .5s;
+        }
+
+        .nav ul {
+            float: center;
+            margin-left: 25%;
+            margin-right: auto;
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li a {
+            float: center;
+            background-color: rgb(255,192,0);
+            list-style: 50px;
+            color: whitesmoke;
+            padding: 0 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: .5s;
+        }
+
+        .nav ul li a.active,
+        .nav ul li a:hover {
+            color: #fff;
+            background:     #f00;
+
+        }
+
+        section .sec1 {
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* 카드 */
+        
+        .row{
+            min-width: 1000px;
+        }
+
+        #section-feature ul {
+            padding: 0;
+            list-style: none;
+            position: relative;
+        }
+
+        #section-feature li {
+            margin: 10px;
+            min-width: 200px;
+            box-sizing: border-box;
+            position: relative;
+            height: 380px;
+            padding: 2%;
+            float: left;
+            margin-bottom: 40px;
+            user-select: none;
+        }
+
+        #section-feature .sf-wrap {
+            background-repeat: no-repeat;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            perspective: 600px;
+            cursor: pointer;
+        }
+
+        .sf-mdl-left,
+        .sf-mdl-right,
+        .sf-mdl-left-full,
+        .sf-mdl-right-full {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            transition: all .5s;
+            overflow: hidden;
+        }
+
+        .sf-icon {
+            position: absolute;
+            top: 90px;
+            text-align: center;
+            width: 100%;
+            left: 0;
+            width: 200%;
+            color: #fb527a;
+        }
+
+
+        .sf-mdl-left-full .sf-icon,
+        .sf-mdl-right-full .sf-icon {
+            color: #fff;
+        }
+
+        .sf-mdl-right,
+        .sf-mdl-right-full {
+            left: auto;
+            right: 0;
+        }
+
+        .sf-mdl-left-full,
+        .sf-mdl-right-full {
+            background-color: #fb527a;
+            z-index: 9;
+            color: #fff;
+        }
+
+        .sf-wrap a {
+            color: #fff;
+            text-decoration: none;
+            margin-top: 110px;
+        }
+
+        .sf-mdl-left,
+        .sf-mdl-right {
+            background-color: #fff;
+            z-index: 10;
+        }
+
+        .sf-wrap>.sf-mdl-right-full,
+        .sf-wrap>.sf-mdl-right {
+            background-position: right -30px;
+        }
+
+        .sf-wrap>.sf-mdl-right,
+        .sf-wrap>.sf-mdl-left-full {
+
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            transform-origin: 0 0;
+            transform: rotateY(0deg);
+        }
+
+        .sf-wrap.hover>.sf-mdl-right {
+            transform: rotateY(-45deg);
+            background-color: #ececec;
+        }
+
+        .sf-wrap>.sf-mdl-left-full {
+            transform-origin: 100% 0;
+            transform: rotateY(180deg);
+        }
+
+        .sf-wrap.active>.sf-mdl-right,
+        .sf-wrap.hover.active>.sf-mdl-right {
+            transform: rotateY(-180deg);
+        }
+
+        .sf-wrap.active>.sf-mdl-left-full {
+            transform: rotateY(0deg);
+        }
+
+        .active .sf-mdl-left-full,
+        .active .sf-mdl-right-full {
+            z-index: 11;
+        }
+
+        .sf-wrap div h3 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 22px;
+        }
+
+        .sf-wrap div h3,
+        .sf-wrap div p {
+            width: 200%;
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 190px;
+        }
+
+        .sf-wrap div p {
+            padding: 0 10%;
+            line-height: 18px;
+            font-size: 14px;
+            top: 180px;
+        }
+
+        .sf-wrap div.sf-mdl-right h3,
+        .sf-wrap div.sf-mdl-right-full h3,
+        .sf-wrap div.sf-mdl-right p,
+        .sf-wrap div.sf-mdl-right-full p,
+        .sf-mdl-right .sf-icon,
+        .sf-mdl-right-full .sf-icon {
+            left: auto;
+            right: 0;
+        }
+
+        .sf-wrap div.sf-mdl-left-full h3,
+        .sf-wrap div.sf-mdl-right-full h3 {
+            top: 175px;
+        }
+
+        p {
+            margin-top: 55px;
+        }
+
+        a {
+            margin-top: 50px;
+        }
+        /* 여기는 질문 폼 */
+        #exampleFormControlInput1{
+
+            width: 150px;
+            height: 40px;
+        }
+        #exampleFormControlSelect1{
+            width: 100px;
+            height: 30px;
+
+        }
+        #exampleFormControlTextarea1{
+            width: 330px;
+            height: 300px;
+        }
+        #category-f{
+            width: 30%;
+            margin-left: 30px;
+        }
+        #title-f,#text-f{
+            width: 10%;
+            margin-left: 30px;
+
+        }
+        #qanda-button{
+            float:right;
+            margin-right: 150px;
+
+        }   
+    </style>
+</head>
+
+<body>
+    <div class="flexbox_header" id="navbar">
+        <div class="contents">
+            <div style="position:absolute; text-align: center;     margin-top: -5%;">
+                <img src="C:\Users\user\Desktop\5.24_hackaton\img\과제할래.png" alt="mainlogo" id="mainlogo">
+            </div>
+            <div style="position:absolute">
+                <img src="C:\Users\user\Desktop\5.24_hackaton\img\LOGIN.png" alt="login" id="login">
+            </div>
+            <img src="C:\Users\user\Desktop\5.24_hackaton\img\logo_background.png" alt="background" id="background">
+        </div>
+    </div>
+    <br>
+    <br><br>
+    <div class="container">
+        <div class="header">
+            <a class="btn"></a>
+            <script type="text/javascript">
+                $('.btn').on("click", function () {
+                    $('.btn').toggleClass('btnc');
+                    $('.sidebar').toggleClass('side');
+                });
+                function toggle_div() {
+                    var element = document.getElementById('sidebar');
+                    element.classList.toggle('active');
+                }
+            </script>
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'home' student.name %}">Home</a></li>
+                    <li><a href="{% url 'ppt' student.name %}">PPT</a></li>
+                    <li><a href="{% url 'report' student.name %}">레포트</a></li>
+                    <li><a href="{% url 'qna' student.name %}">Question</a></li>
+                    <li><a href="#">자유게시판</a></li>
+                    <li><a href="#">꿀팁</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar" id="Sidebar">
+                <div class="toggle" onclick="toggle_div()"></div>
+                <ul>
+                    <li><a class="ion-social-tux" href="#"></a></li>
+                    <li><a class="ion-social-wordpress" href="#"></a></li>
+                    <li><a class="ion-social-instagram" href="#"></a></li>
+                    <li><a class="ion-android-folder" href="#"></a></li>
+                    <li><a class="ion-android-image" href="#"></a></li>
+                    <li><a class="ion-android-cloud" href="#"></a></li>
+                </ul>
+            </div>
+            <div id="section-feature" class="container2">
+                    <div class="row">
+                        <ul>
+                            <li id="sf-innovation" class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="sf-wrap">
+    
+                                    <div class="sf-mdl-left">
+    
+                                        <div class="sf-icon">
+    
+                                            <i class="fa fa-fw fa-rocket fa-5x"></i>
+                                        </div>
+                                        <h3>Responsive Design</h3>
+    
+                                    </div>
+                                    <div class="sf-mdl-right">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-rocket fa-5x"></i>
+                                        </div>
+                                        <h3>Responsive Design</h3>
+    
+                                    </div>
+    
+                                    <div class="sf-mdl-left-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-rocket fa-5x"></i>
+                                        </div>
+    
+                                        <h3><a href="#">Responsive Design</a>
+                                        </h3>
+                                        <p>Curabitur blandit tempus ardua ridiculus sed magna. Integer legentibus erat a
+                                            ante
+                                            historiarum dapibus.</p>
+    
+                                    </div>
+                                    <div class="sf-mdl-right-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-rocket fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Responsive Design</a></h3>
+                                        <p>Curabitur blandit tempus ardua ridiculus sed magna. Integer legentibus erat a
+                                            ante
+                                            historiarum dapibus.</p>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li id="sf-community" class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="sf-wrap">
+                                    <div class="sf-mdl-left">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-camera-retro fa-5x"></i>
+                                        </div>
+                                        <h3>Loves Photography</h3>
+                                    </div>
+                                    <div class="sf-mdl-right">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-camera-retro fa-5x"></i>
+                                        </div>
+                                        <h3>Loves Photography</h3>
+                                    </div>
+    
+                                    <div class="sf-mdl-left-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-camera-retro fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Loves Photography</a></h3>
+                                        <p>Hi omnes lingua, institutis, legibus inter se differunt. Donec sed odio operae,
+                                            eu
+                                            vulputate felis rhoncus.</p>
+                                    </div>
+                                    <div class="sf-mdl-right-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-camera-retro fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Loves Photography</a></h3>
+                                        <p>Hi omnes lingua, institutis, legibus inter se differunt. Donec sed odio operae,
+                                            eu
+                                            vulputate felis rhoncus.</p>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li id="sf-academy" class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="sf-wrap">
+                                    <div class="sf-mdl-left">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-cloud-upload fa-5x"></i>
+                                        </div>
+                                        <h3>Retina Display</h3>
+                                    </div>
+                                    <div class="sf-mdl-right">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-cloud-upload fa-5x"></i>
+                                        </div>
+                                        <h3>Retina Display</h3>
+                                    </div>
+    
+                                    <div class="sf-mdl-left-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-cloud-upload fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Retina Display</a></h3>
+                                        <p>Nec dubitamus multa iter quae et nos invenerat. Ullamco laboris nisi ut aliquid
+                                            ex ea
+                                            commodi consequat.</p>
+                                    </div>
+                                    <div class="sf-mdl-right-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-cloud-upload fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Retina Display</a></h3>
+                                        <p>Nec dubitamus multa iter quae et nos invenerat. Ullamco laboris nisi ut aliquid
+                                            ex ea
+                                            commodi consequat.</p>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li id="sf-opportunity" class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="sf-wrap">
+                                    <div class="sf-mdl-left">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-star-half-o fa-5x"></i>
+                                        </div>
+                                        <h3>Source File Included</h3>
+                                    </div>
+                                    <div class="sf-mdl-right">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-star-half-o fa-5x"></i>
+                                        </div>
+                                        <h3>Source File Included</h3>
+                                    </div>
+    
+                                    <div class="sf-mdl-left-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-star fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Source File Included</a></h3>
+                                        <p>Morbi fringilla convallis sapien, id pulvinar odio volutpat. Contra legem facit
+                                            qui id
+                                            facit quod lex prohibet.</p>
+                                    </div>
+                                    <div class="sf-mdl-right-full">
+                                        <div class="sf-icon">
+                                            <i class="fa fa-fw fa-star fa-5x"></i>
+                                        </div>
+                                        <h3><a href="#">Source File Included</a></h3>
+                                        <p>Morbi fringilla convallis sapien, id pulvinar odio volutpat. Contra legem facit
+                                            qui id
+                                            facit quod lex prohibet.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <script>
+                    $(function () {
+                        $('#section-feature .sf-wrap')
+                            .hover(function () {
+                                $(this).addClass('hover');
+                            }, function () {
+                                $(this).removeClass('hover');
+                            })
+                            .click(function (event) {
+                                //if (event.target.nodeName != 'A') {
+                                $(this).toggleClass('active');
+                                //}
+                            });
+                    });
+    
+                </script>
+            
+            </div>
+        </div>
+        <div class="footer">FOOTER</div>    
+    </div>
+
+</body>
+
+</html>

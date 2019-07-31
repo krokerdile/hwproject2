@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login_Test</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        @import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            width: 100%;
+
+            margin: 0;
+        }
+        #login-f{
+            margin:0;
+            width:700px;
+            height: 100%;
+        }
+
+        /* 여기는 플렉스 박스 로그인 페이지 따라다니기 */
+        .flexbox-header {
+            display: flex;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #navbar {
+            overflow: hidden;
+            background-color: rgb(255,192,0);
+            transition: 0.4s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            height: 20%;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            #navbar {
+                padding: 20px 10px !important;
+            }
+
+        }
+
+        /* 여기부터 그리드 컨테이너 */
+        #txt1,#txt2{
+            border: 3px rgb(255,192,0) solid;
+        }
+        #btn{
+            background-color: rgb(248, 204, 6);
+            margin-right: 50px;
+        }
+        .container {
+            background-color: white;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 10fr 1fr;
+            grid-template-areas:
+                "header"
+                "con"
+                "footer";
+
+        }
+
+        /* header 파트 */
+        .header {
+            grid-column: header;
+            width: 100%;
+            background-color: rgb(255,192,0);
+            padding-top: 5%;
+        }
+
+        /* 시간표 파트 */
+
+
+
+        /* 이미지 및 컨텐츠 넣을 곳 */
+        .content {
+            grid-row: con;
+            display: grid;
+            grid-template-columns: 1fr 10fr 4fr;
+            grid-template-rows: 1;
+            grid-template-areas:
+                "sidebar table qanda";
+            height: 100%;
+        }
+
+        .table-wrapper {
+            grid-column: table;
+        }
+
+        #qanda {
+            grid-column: qanda;
+            color:#47b8e0;
+        }
+
+        /* 마지막 밑 부분 */
+        .footer {
+            grid-column: footer;
+            background-color: black;
+            color: white;
+            border: 1px solid;
+            height: 100%;
+        }
+
+        /* 여기서부터 사이드 바 전체 */
+        .sidebar {
+            grid-column: sidebar;
+            float: left;
+            width: 100%;
+            margin-left: -100%;
+            height: 100%;
+            background: #ff7473;
+            transition: 0.5s;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .side {
+            margin-left: 0px;
+        }
+
+        .sidebar ul {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .sidebar ul li {
+            list-style: none;
+
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            height: auto;
+            width: 100%;
+            font-size: 40px;
+            line-height: 80px;
+            text-align: center;
+            display: block;
+            transition: 0.6s all;
+        }
+
+        .btn {
+            margin-left: 50px;
+            margin-top: 10px;
+            z-index: 2;
+            float: left;
+            padding: 0 10;
+            font-size: 40px;
+            text-decoration: none;
+            color: white;
+            font-family: Ionicons;
+
+        }
+
+        .btn:before {
+            content: '\f20d';
+            z-index: 2;
+        }
+
+        .btnc::before {
+            content: '\f12a';
+            z-index: 2;
+        }
+
+        /* 여기부터 nav바 만드는 곳 */
+
+        .nav {
+            width: 100%;
+            box-sizing: border-box;
+            transition: .5s;
+        }
+
+        .nav ul {
+            float: center;
+            margin-left: 25%;
+            margin-right: auto;
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li a {
+            float: center;
+            background-color: rgb(255,192,0);
+            list-style: 50px;
+            color: whitesmoke;
+            padding: 0 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: .5s;
+        }
+
+        .nav ul li a.active,
+        .nav ul li a:hover {
+            color: #fff;
+            background:     #f00;
+
+        }
+
+        section .sec1 {
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* 맨 위의 NAV 바 부분 */
+        #navbar .contents {
+            height: 100%;
+        }
+
+        #mainlogo{
+            z-index: 100;
+            width:24%;
+            position: relative;
+            padding-top: -5%;
+        }
+        #login{
+            z-index: 100;
+            width:10%;
+            position: relative;
+            float:right;
+        }
+        
+        #background{
+            width:100%;
+        }
+        /* 시간표  */
+        .fl-table{
+            width: 1000px;
+            height: 650px;
+            border: 1px white solid;
+        }
+        #thcla{
+            width: 10%;
+
+        }
+        #thmon,#thtue,#thwed,#ththu,#thfri{
+            background-color:royalblue;
+            width: 17%;
+        }
+        #lun,#mon,#tue,#wed,#thu,#fri{
+            background-color: #ff7473;
+        }
+        #cla1, #cla2,#cla3,#cla4,#cla5,#cla6, #cla7{
+            background-color:rgb(255,192,0);
+
+        }
+
+        /* 여기는 질문 폼 */
+        #exampleFormControlInput1{
+
+            width: 150px;
+            height: 40px;
+        }
+        #exampleFormControlSelect1{
+            width: 100px;
+            height: 30px;
+
+        }
+        #exampleFormControlTextarea1{
+            width: 330px;
+            height: 300px;
+        }
+        #category-f{
+            width: 30%;
+            margin-left: 30px;
+        }
+        #title-f,#text-f{
+            width: 10%;
+            margin-left: 30px;
+
+        }
+        #qanda-button{
+            float:right;
+            margin-right: 150px;
+
+        }
+        a{
+        text-decoration: none;
+        }
+        form{
+            margin: 0;
+            position: relative;
+            vertical-align: middle;
+        }
+        fieldset{
+            width:33%;
+            border-radius:10%;
+            border-color:rgb(255,192,0);
+            margin-left: 65%;
+            margin-top: 5%;
+        }
+        .login .top{
+        position: relative;
+        width:380px;
+        }
+        /* 아이디와 비밀번호 입력칸 아래 공백 */
+        .login .top li{
+        padding : 0 0 9px;
+        }
+        /* label은 inline 요소 -> 가로 사이즈 제공 x (width 사용 불가)
+        */
+        .login .top li label{
+        display: inline-block; /* weight, height 적용 가능 */
+        width:63px;
+        font-size: 12px;
+        color: #464646;
+        font-family:dotum;
+        font-weight:bold;
+        }
+        .login .top li input[type="text"],
+        .login .top li input[type="password"]
+        {
+            width:144px;
+            height:29px;
+            padding:0;
+        }
+        .login .top li.btn{
+            position: absolute;
+            right:0; 
+            top:0;
+            display: block;
+        width:109px;
+        height:67px;
+        background:rgb(248, 204, 6);
+        border:1px solid rgb(177, 145, 5);
+        font-size:17px;
+        color:#fff;
+        text-align:center;
+        /* 한줄 짜리 text 세로 가운데 정렬 : height 랑 같은 크기 할당*/
+        line-height:69px;
+        font-weight:bold;
+        border-radius:10%;
+        }
+        /* .login .top li a{
+        display: block;
+        width:109px;
+        height:67px;
+        background:rgb(248, 204, 6);
+        border:1px solid rgb(177, 145, 5);
+        font-size:17px;
+        color:#fff;
+        text-align:center;
+        line-height:69px;
+        font-weight:bold;
+        border-radius:10%;
+        } */
+        .login .top li.save{
+        padding: 20px 0 0 59px;
+        }
+        .login .top li.save label{
+        width:auto;
+        font-weight:normal;
+        }
+        .login .btm{
+        padding: 20px 0 0 59px;
+        }
+        .login .btm li{
+        padding:0 0 11px;
+        color:#383d41;
+        font-size:12px;
+        font-family:dotum;
+        }
+        .login .btm li a{
+        margin:10px;
+        font-size:12px;
+        font-family:dotum;
+        font-weight:bold;
+        color:rgb(248, 204, 6);
+        text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexbox_header" id="navbar">
+            <div class="contents">
+                <div style="position:absolute; text-align: center;     margin-top: -5%;">
+                    <img src="{% static '과제할래.png' %}" alt="mainlogo" id="mainlogo">
+                </div>
+                <div style="position:absolute">
+                    <a href="{% url 'login' %}"> <img src="{% static 'LOGIN.png' %}" alt="login" id="login"></a>
+                </div>
+                <div style="position:absolute">
+                    <a href="{% url 'signup' %}"> 회원가입 </a>
+                </div>
+                <img src="{% static 'logo_background.png' %}" alt="background" id="background">
+            </div>
+    </div>
+    <br>
+    <br><br>
+    <div class="container">
+        <div class="header">
+            <a class="btn"></a>
+            <script type="text/javascript">
+                $('.btn').on("click", function () {
+                    $('.btn').toggleClass('btnc');
+                    $('.sidebar').toggleClass('side');
+                });
+                function toggle_div() {
+                    var element = document.getElementById('sidebar');
+                    element.classList.toggle('active');
+                }
+            </script>
+            <div class="nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">PPT</a></li>
+                    <li><a href="#">레포트</a></li>
+                    <li><a href="#">Question</a></li>
+                    <li><a href="#">자유게시판</a></li>
+                    <li><a href="#">꿀팁</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar" id="Sidebar">
+                <div class="toggle" onclick="toggle_div()"></div>
+                <ul>
+                    <li><a class="ion-social-tux" href="#"></a></li>
+                    <li><a class="ion-social-wordpress" href="#"></a></li>
+                    <li><a class="ion-social-instagram" href="#"></a></li>
+                    <li><a class="ion-android-folder" href="#"></a></li>
+                    <li><a class="ion-android-image" href="#"></a></li>
+                    <li><a class="ion-android-cloud" href="#"></a></li>
+                </ul>
+            </div>
+            <form id="login-f" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <fieldset> <!--영역을 그룹화-->
+                    <div id="LogInBox">
+                        <legend>Log-In</legend> <!--로그인이라는 박스로 묶기-->
+                        <div class="login">
+                            <!--ul 앞 버튼 없애기-->
+                            <ul type="none" class="top">
+                            <!--'아이디'라는 부분만 눌러도 아이디를 입력할 수 있음(label)-->
+                            <li><label for="txt1">아이디</label><input type="text" id="txt1" name="username"></li>
+                            <li><label for="txt2">비밀번호</label><input type="password" name="password" id="txt2"></li>
+                            <!--Log-In 링크화-->
+                            <li><a href="#a"><input class="btn btn-primary" id="btn" type="submit" value="로그인"></a></li>
+                            
+                            <li class="save"><input type="checkbox" id="chk1"><label for="chk1">ID 저장</label></li>
+                            </ul>
+                            <ul class="btm">
+                            <li>아이디를 잊으셨나요?<a href="#a">아이디 찾기</a></li>
+                            <li>비밀번호를 잊으셨나요?<a href="#a">비밀번호 찾기</a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                </fieldset>
+            </form>  
+            
+
+        </div>
+
+        <div class="footer">FOOTER</div>    
+    </div>
+    </div>
+</body>
+
+</html>

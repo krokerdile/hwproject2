@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>firstPage</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        @import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            width: 100%;
+
+            margin: 0;
+        }
+
+        /* 여기는 플렉스 박스 로그인 페이지 따라다니기 */
+        * {
+            box-sizing: border-box;
+        }
+
+        #navbar {
+            overflow: hidden;
+            /* background-color: rgb(255, 165, 0); */
+            transition: 0.4s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            height: 20%;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            #navbar {
+                padding: 20px 10px !important;
+            }
+
+        }
+
+        /* 여기부터 그리드 컨테이너 */
+        .container {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 3fr 0.5fr;
+            grid-template-areas:
+                "a"
+                "b"
+                "c"
+        }
+        /* 이미지 및 컨텐츠 넣을 곳 */
+        .content {
+            grid-row: a;
+        }
+        .content2 {
+            margin-left: 30%;
+            grid-row: b;
+        }
+
+        /* 마지막 밑 부분 */
+        .footer {
+            grid-row:  c;
+            background-color: black;
+            border: 1px solid;
+            height:100%;
+        }
+
+        .footer #logo3{
+            height:50%;
+        }
+
+        #mainImg{
+            width: 100%;
+        }
+        /* 맨 위의 NAV 바 부분 */
+        #navbar .contents{
+            height:100%;
+        }
+        
+        #navbar .contents #login{
+            height:100%;
+        }
+        #background{
+            width:100%;
+        }
+        #mainlogo{
+            z-index: 100;
+            width:24%;
+            position: relative;
+            padding-top: -5%;
+        }
+        #login{
+            z-index: 100;
+            width:10%;
+            position: relative;
+            float:right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexbox_header" id="navbar">
+        <div class="contents">
+            <div style="position:absolute; text-align: center;     margin-top: -5%;">
+                <img src="{% static '과제할래.png' %}" alt="mainlogo" id="mainlogo">
+            </div>
+            <div style="position:absolute">
+                <a href="{% url 'login' %}"> <img src="{% static 'LOGIN.png' %}" alt="login" id="login"></a>
+            </div>
+            <div id="sign" style="position:absolute">
+                <a href="{% url 'signup' %}"> 회원가입 </a>
+            </div>
+
+            <img src="{% static 'logo_background.png' %}" alt="background" id="background">
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="content">
+            
+        </div>
+        <div class="content2">
+            <div style="position:absolute">
+                <img src="{% static 'image.png' %}">
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+    
+</body>
+
+</html>

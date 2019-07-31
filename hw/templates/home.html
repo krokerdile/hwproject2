@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        @import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            width: 100%;
+
+            margin: 0;
+        }
+
+        #login {
+            float: right;
+        }
+
+        /* 여기는 플렉스 박스 로그인 페이지 따라다니기 */
+        .flexbox-header {
+            display: flex;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #navbar {
+            overflow: hidden;
+            background-color: rgb(255,192,0);
+            transition: 0.4s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            height: 20%;
+        }
+
+        #navbar .contents{
+            height:100%;
+        }
+        
+        #navbar .contents #login{
+            height:100%;
+        }
+        #background{
+            width:100%;
+        }
+        #mainlogo{
+            z-index: 100;
+            width:24%;
+            position: relative;
+            padding-top: -5%;
+        }
+        #login{
+            z-index: 100;
+            width:10%;
+            position: relative;
+            float:right;
+        }
+        #logout{
+            top: 50px;
+            left: 600px;
+            z-index: 101;
+            width: 10%;
+            position: relative;
+            float: right;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            #navbar {
+                padding: 20px 10px !important;
+            }
+
+        }
+
+        /* 여기부터 그리드 컨테이너 */
+        .container {
+            background-color: white;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 10fr 1fr;
+            grid-template-areas:
+                "header"
+                "con"
+                "footer";
+
+        }
+
+        /* header 파트 */
+        .header {
+            grid-column: header;
+            width: 100%;
+            background-color: rgb(255,192,0);
+            padding-top: 5%;
+        }
+
+        /* 시간표 파트 */
+
+
+
+        /* 이미지 및 컨텐츠 넣을 곳 */
+        .content {
+            grid-row: con;
+            display: grid;
+            grid-template-columns: 1fr 10fr 4fr;
+            grid-template-rows: 0;
+            grid-template-areas:
+                "sidebar table qanda";
+            height: 100%;
+        }
+
+        .table-wrapper {
+            grid-column: table;
+        }
+
+        #qanda {
+            grid-column: qanda;
+            color:#47b8e0;
+        }
+
+        /* 마지막 밑 부분 */
+        .footer {
+            grid-column: footer;
+            background-color: black;
+            color: white;
+            border: 1px solid;
+            height: 6%;
+        }
+
+        /* 여기서부터 사이드 바 전체 */
+        .sidebar {
+            grid-column: sidebar;
+            float: left;
+            width: 100%;
+            margin-left: -100%;
+            height: 100%;
+            background: #ff7473;
+            transition: 0.5s;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .side {
+            margin-left: 0px;
+        }
+
+        .sidebar ul {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .sidebar ul li {
+            list-style: none;
+
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            height: auto;
+            width: 100%;
+            font-size: 40px;
+            line-height: 80px;
+            text-align: center;
+            display: block;
+            transition: 0.6s all;
+        }
+
+        .btn {
+            margin-left: 50px;
+            margin-top: 10px;
+            z-index: 2;
+            float: left;
+            padding: 0 10;
+            font-size: 40px;
+            text-decoration: none;
+            color: white;
+            font-family: Ionicons;
+
+        }
+
+        .btn:before {
+            content: '\f20d';
+            z-index: 2;
+        }
+
+        .btnc::before {
+            content: '\f12a';
+            z-index: 2;
+        }
+
+        /* 여기부터 nav바 만드는 곳 */
+
+        .nav {
+            width: 100%;
+            box-sizing: border-box;
+            transition: .5s;
+        }
+
+        .nav ul {
+            float: center;
+            margin-left: 25%;
+            margin-right: auto;
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li a {
+            float: center;
+            background-color: rgb(255,192,0);
+            list-style: 50px;
+            color: whitesmoke;
+            padding: 0 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: .5s;
+        }
+
+        .nav ul li a.active,
+        .nav ul li a:hover {
+            color: #fff;
+            background:     #f00;
+
+        }
+
+        section .sec1 {
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* 맨 위의 NAV 바 부분 */
+        #navbar .contents {
+            height: 100%;
+        }
+
+        #navbar .contents #logo2 {
+            height: 100%;
+        }
+
+        #navbar .contents #login {
+            height: 100%;
+        }
+
+        #login {
+            float: right;
+        }
+
+        #logo {
+            z-index: 2;
+            position: absolute;
+            display: flex;
+            float: left;
+        }
+        /* 시간표  */
+        .fl-table{
+            width: 1000px;
+            height: 500px;
+            border: 1px white solid;
+        }
+        #thcla{
+            width: 10%;
+
+        }
+        #thmon,#thtue,#thwed,#ththu,#thfri{
+            background-color:royalblue;
+            width: 17%;
+        }
+        #lun,#mon,#tue,#wed,#thu,#fri{
+            background-color: #ff7473;
+        }
+        #cla1, #cla2,#cla3,#cla4,#cla5,#cla6, #cla7{
+            background-color:rgb(255,192,0);
+
+        }
+
+        /* 여기는 질문 폼 */
+        #exampleFormControlInput1{
+
+            width: 150px;
+            height: 40px;
+        }
+        #exampleFormControlSelect1{
+            width: 100px;
+            height: 30px;
+
+        }
+        #exampleFormControlTextarea1{
+            width: 330px;
+            height: 300px;
+        }
+        #category-f{
+            width: 30%;
+            margin-left: 30px;
+        }
+        #title-f,#text-f{
+            width: 10%;
+            margin-left: 30px;
+
+        }
+        #qanda-button{
+            float:right;
+            margin-right: 150px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexbox_header" id="navbar">
+        <div class="contents">
+            <div style="position:absolute; text-align: center;     margin-top: -5%;">
+                <img src="{% static '과제할래.png' %}" alt="mainlogo" id="mainlogo">
+            </div>
+            <div style="position:absolute">
+                <a href="{% url 'logout' %}"> <img src="{% static 'logout.png' %}" alt="logout" id="logout"></a>
+            </div>
+            <div style="position:absolute">
+                <a href="{% url 'signup' %}" id=" sign1"> 회원가입 </a>
+            </div>
+            <img src="{% static 'logo_background.png' %}" alt="background" id="background">
+        </div>
+    </div>
+    <br>
+    <br><br>
+    <div class="container">
+        <div class="header">
+            <a class="btn"></a>
+            <script type="text/javascript">
+                $('.btn').on("click", function () {
+                    $('.btn').toggleClass('btnc');
+                    $('.sidebar').toggleClass('side');
+                });
+                function toggle_div() {
+                    var element = document.getElementById('sidebar');
+                    element.classList.toggle('active');
+                }
+            </script>
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'home' student.name %}">Home</a></li>
+                    <li><a href="{% url 'ppt' student.name %}">PPT</a></li>
+                    <li><a href="{% url 'report' student.name %}">레포트</a></li>
+                    <li><a href="{% url 'qna' student.name %}">Question</a></li>
+                    <li><a href="#">자유게시판</a></li>
+                    <li><a href="#">꿀팁</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th id="thcla">교시</th>
+                            <th id="thmon">월</th>
+                            <th id="thtue">화</th>
+                            <th id="thwed">수</th>
+                            <th id="ththu">목</th>
+                            <th id="thfri">금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="cla1">1교시</td>
+                            <td id="mon1">{% if student.name is not None %}{{student.subject11}}{% endif %}</td>
+                            <td id="tue1">{% if student.name is not None %}{{student.subject12}}{% endif %}</td>
+                            <td id="wed1">{% if student.name is not None %}{{student.subject13}}{% endif %}</td>
+                            <td id="thu1">{% if student.name is not None %}{{student.subject14}}{% endif %}</td>
+                            <td id="fri1">{% if student.name is not None %}{{student.subject15}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td id="cla2">2교시</td>
+                            <td id="mon2">{% if student.name is not None %}{{student.subject21}}{% endif %}</td>
+                            <td id="tue2">{% if student.name is not None %}{{student.subject22}}{% endif %}</td>
+                            <td id="wed2">{% if student.name is not None %}{{student.subject23}}{% endif %}</td>
+                            <td id="thu2">{% if student.name is not None %}{{student.subject24}}{% endif %}</td>
+                            <td id="fri2">{% if student.name is not None %}{{student.subject25}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td id="lun">점심</td>
+                            <td id="mon"></td>
+                            <td id="tue"></td>
+                            <td id="wed"></td>
+                            <td id="thu"></td>
+                            <td id="fri"></td>
+                        </tr>
+                        <tr>
+                            <td id="cla3">3교시</td>
+                            <td id="mon4">{% if student.name is not None %}{{student.subject31}}{% endif %}</td>
+                            <td id="tue4">{% if student.name is not None %}{{student.subject32}}{% endif %}</td>
+                            <td id="wed4">{% if student.name is not None %}{{student.subject33}}{% endif %}</td>
+                            <td id="thu4">{% if student.name is not None %}{{student.subject34}}{% endif %}</td>
+                            <td id="fri4">{% if student.name is not None %}{{student.subject35}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td id="cla4">4교시</td>
+                            <td id="mon4">{% if student.name is not None %}{{student.subject41}}{% endif %}</td>
+                            <td id="tue4">{% if student.name is not None %}{{student.subject42}}{% endif %}</td>
+                            <td id="wed4">{% if student.name is not None %}{{student.subject43}}{% endif %}</td>
+                            <td id="thu4">{% if student.name is not None %}{{student.subject44}}{% endif %}</td>
+                            <td id="fri4">{% if student.name is not None %}{{student.subject45}}{% endif %}</td>
+
+                        </tr>
+                        <tr>
+                            <td id="cla5">5교시</td>
+                            <td id="mon5">{% if student.name is not None %}{{student.subject51}}{% endif %}</td>
+                            <td id="tue5">{% if student.name is not None %}{{student.subject52}}{% endif %}</td>
+                            <td id="wed5">{% if student.name is not None %}{{student.subject53}}{% endif %}</td>
+                            <td id="thu5">{% if student.name is not None %}{{student.subject54}}{% endif %}</td>
+                            <td id="fri5">{% if student.name is not None %}{{student.subject55}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td id="cla6">6교시</td>
+                            <td id="mon6">{% if student.name is not None %}{{student.subject61}}{% endif %}</td>
+                            <td id="tue6">{% if student.name is not None %}{{student.subject62}}{% endif %}</td>
+                            <td id="wed6">{% if student.name is not None %}{{student.subject63}}{% endif %}</td>
+                            <td id="thu6">{% if student.name is not None %}{{student.subject64}}{% endif %}</td>
+                            <td id="fri6">{% if student.name is not None %}{{student.subject66}}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <td id="cla7">7교시</td>
+                            <td id="mon7">{% if student.name is not None %}{{student.subject71}}{% endif %}</td>
+                            <td id="tue7">{% if student.name is not None %}{{student.subject72}}{% endif %}</td>
+                            <td id="wed7">{% if student.name is not None %}{{student.subject73}}{% endif %}</td>
+                            <td id="thu7">{% if student.name is not None %}{{student.subject74}}{% endif %}</td>
+                            <td id="fri7">{% if student.name is not None %}{{student.subject75}}{% endif %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sidebar" id="Sidebar">
+                <div class="toggle" onclick="toggle_div()"></div>
+                <ul>
+                    <li><a class="ion-social-tux" href="#"></a></li>
+                    <li><a class="ion-social-wordpress" href="#"></a></li>
+                    <li><a class="ion-social-instagram" href="#"></a></li>
+                    <li><a class="ion-android-folder" href="#"></a></li>
+                    <li><a class="ion-android-image" href="#"></a></li>
+                    <li><a class="ion-android-cloud" href="#"></a></li>
+                </ul>
+            </div>
+            <form id="qanda">
+                <div class="form-group" id="title-f">
+                    <label for="exampleFormControlInput1">제목</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요." >
+                </div>
+                <div class="form-group" id="category-f">
+                    <label for="exampleFormControlSelect1">카테고리</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>ppt</option>
+                        <option>레포트</option>
+                        <option>과제</option>
+                        <option>수업</option>
+                        <option>기타</option>
+                    </select>
+                </div>
+                <div class="form-group" id="text-f">
+                    <label for="exampleFormControlTextarea1">내용</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                </div>
+                <button id="qanda-button" type="submit">제출</button>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="footer">FOOTER</div>
+    </div>
+</body>
+
+</html>

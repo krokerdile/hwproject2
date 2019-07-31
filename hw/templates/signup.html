@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login_Test</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+        @import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            width: 100%;
+
+            margin: 0;
+        }
+
+        /* 여기는 플렉스 박스 로그인 페이지 따라다니기 */
+        .flexbox-header {
+            display: flex;
+        }
+
+        s * {
+            box-sizing: border-box;
+        }
+
+        #navbar {
+            overflow: hidden;
+            background-color: rgb(255, 192, 0);
+            transition: 0.4s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 99;
+            height: 20%;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            #navbar {
+                padding: 20px 10px !important;
+            }
+
+        }
+
+        /* 여기부터 그리드 컨테이너 */
+        .container {
+            background-color: white;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1fr 10fr 1fr;
+            grid-template-areas:
+                "header"
+                "con"
+                "footer";
+
+        }
+
+        /* header 파트 */
+        .header {
+            grid-column: header;
+            width: 100%;
+            background-color: rgb(255, 192, 0);
+            padding-top: 5%;
+        }
+
+        /* 시간표 파트 */
+
+
+
+        /* 이미지 및 컨텐츠 넣을 곳 */
+        .content {
+            grid-row: con;
+            display:flex;
+            height: 100%;
+        }
+
+        .table-wrapper {
+            grid-column: table;
+        }
+
+        
+
+        #LogInBox{
+            grid-column: qanda;
+            color: #47b8e0;
+        }
+
+        /* 마지막 밑 부분 */
+        .footer {
+            grid-column: footer;
+            background-color: black;
+            color: white;
+            border: 1px solid;
+            height: 100%;
+        }
+
+        /* 여기부터 nav바 만드는 곳 */
+
+        .nav {
+            width: 100%;
+            box-sizing: border-box;
+            transition: .5s;
+        }
+
+        .nav ul {
+            float: center;
+            margin-left: 25%;
+            margin-right: auto;
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li a {
+            float: center;
+            background-color: rgb(255, 192, 0);
+            list-style: 50px;
+            color: whitesmoke;
+            padding: 0 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: .5s;
+        }
+
+        .nav ul li a.active,
+        .nav ul li a:hover {
+            color: #fff;
+            background: #f00;
+
+        }
+
+        section .sec1 {
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* 맨 위의 NAV 바 부분 */
+        #navbar .contents {
+            height: 100%;
+        }
+
+        #mainlogo {
+            z-index: 100;
+            width: 24%;
+            position: relative;
+            padding-top: -5%;
+        }
+
+        #login {
+            z-index: 100;
+            width: 10%;
+            position: relative;
+            float: right;
+        }
+
+        #background {
+            width: 100%;
+        }
+
+        /* 시간표  */
+        .fl-table {
+            width: 1000px;
+            height: 650px;
+            border: 1px white solid;
+        }
+
+        #thcla {
+            width: 10%;
+
+        }
+
+        #thmon,
+        #thtue,
+        #thwed,
+        #ththu,
+        #thfri {
+            background-color: royalblue;
+            width: 17%;
+        }
+
+        #lun,
+        #mon,
+        #tue,
+        #wed,
+        #thu,
+        #fri {
+            background-color: #ff7473;
+        }
+
+        #cla1,
+        #cla2,
+        #cla3,
+        #cla4,
+        #cla5,
+        #cla6,
+        #cla7 {
+            background-color: rgb(255, 192, 0);
+
+        }
+
+        
+        /* 여기는 signup 폼 */
+        .signup-f{
+            margin: 0;
+            text-align: center;
+        }
+        
+        span{
+        color:red;
+        }
+        .signup .top{
+        position: relative;
+        width:335px;
+        }
+        .signup .top li label{
+        display: inline-block; /* weight, height 적용 가능 */
+        width:200px;
+        font-size: 12px;
+        color: #464646;
+        font-family:dotum;
+        font-weight:bold;
+        padding:0 0 10px;
+        }
+        .signup .top li input[type="text"],
+        .signup .top li input[type="password"]
+        {
+        width:250px;
+        height:35px;
+        padding:0;
+        border-color:#d9d9d9;
+        }
+        .btn-primary{
+        width:200px;
+        height:67px;
+        background:rgb(248, 204, 6);
+        border:1px solid rgb(177, 145, 5);
+        font-size:17px;
+        color:#fff;
+        text-align:center;
+        /* 한줄 짜리 text 세로 가운데 정렬 : height 랑 같은 크기 할당*/
+        line-height:69px;
+        font-weight:bold;
+        }
+        .under{
+        padding: 50px 115px;
+        }
+        form{
+            margin: 0 auto;
+            position: relative;
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <div class="flexbox_header" id="navbar">
+        <div class="contents">
+            <div style="position:absolute; text-align: center;     margin-top: -5%;">
+                <img src="{% static '과제할래.png' %}" alt="mainlogo" id="mainlogo">
+            </div>
+            <div style="position:absolute">
+                <a href="{% url 'login' %}"> <img src="{% static 'LOGIN.png' %}" alt="login" id="login"></a>
+            </div>
+            <div style="position:absolute">
+                <a href="{% url 'signup' %}"> 회원가입 </a>
+            </div>
+            <img src="{% static 'logo_background.png' %}" alt="background" id="background">
+        </div>
+    </div>
+    <br>
+    <br><br>
+    <div class="container">
+        <div class="header">
+            <a class="btn"></a>
+            <script type="text/javascript">
+                $('.btn').on("click", function () {
+                    $('.btn').toggleClass('btnc');
+                    $('.sidebar').toggleClass('side');
+                });
+                function toggle_div() {
+                    var element = document.getElementById('sidebar');
+                    element.classList.toggle('active');
+                }
+            </script>
+            <div class="nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">PPT</a></li>
+                    <li><a href="#">레포트</a></li>
+                    <li><a href="#">Question</a></li>
+                    <li><a href="#">자유게시판</a></li>
+                    <li><a href="#">꿀팁</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <form action="{% url 'signup' %}" method='POST' id="signup-f">
+                {% csrf_token %}
+                <div class="table-wrapper">
+                    <table class="fl-table">
+                        <thead>
+                            <tr>
+                                <th id="thcla">교시</th>
+                                <th id="thmon">월</th>
+                                
+                                <th id="thtue">화</th>
+                                <th id="thwed">수</th>
+                                <th id="ththu">목</th>
+                                <th id="thfri">금</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="cla1">1교시</td>
+                                <td id="mon1"><input type="text" id="time11" name="mon1"></td>
+                                <td id="tue1"><input type="text" id="time12" name="tue1"></td>
+                                <td id="wed1"><input type="text" id="time13" name="wed1"></td>
+                                <td id="thu1"><input type="text" id="time14" name="thu1"></td>
+                                <td id="fri1"><input type="text" id="time15" name="fri1"></td>
+                            </tr>
+                            <tr>
+                                <td id="cla2">2교시</td>
+                                <td id="mon2"><input type="text" id="time21" name="mon2"></td>
+                                <td id="tue2"><input type="text" id="time22" name="tue2"></td>
+                                <td id="wed2"><input type="text" id="time23" name="wed2"></td>
+                                <td id="thu2"><input type="text" id="time24" name="thu2"></td>
+                                <td id="fri2"><input type="text" id="time25" name="fri2"></td>
+                            </tr>
+                            <tr>
+                                <td id="lun">점심</td>
+                                <td id="mon"></td>
+                                <td id="tue"></td>
+                                <td id="wed"></td>
+                                <td id="thu"></td>
+                                <td id="fri"></td>
+                            </tr>
+                            <tr>
+                                <td id="cla3">3교시</td>
+                                <td id="mon3"><input type="text" id="time31" name="mon3"></td>
+                                <td id="tue3"><input type="text" id="time32" name="tue3"></td>
+                                <td id="wed3"><input type="text" id="time33" name="wed3"></td>
+                                <td id="thu3"><input type="text" id="time34" name="thu3"></td>
+                                <td id="fri3"><input type="text" id="time35" name="fri3"></td>
+                            </tr>
+                            <tr>
+                                <td id="cla4">4교시</td>
+                                <td id="mon4"><input type="text" id="time41" name="mon4"></td>
+                                <td id="tue4"><input type="text" id="time42" name="tue4"></td>
+                                <td id="wed4"><input type="text" id="time43" name="wed4"></td>
+                                <td id="thu4"><input type="text" id="time44" name="thu4"></td>
+                                <td id="fri4"><input type="text" id="time45" name="fri4"></td>
+
+                            </tr>
+                            <tr>
+                                <td id="cla5">5교시</td>
+                                <td id="mon5"><input type="text" id="time51" name="mon5"></td>
+                                <td id="tue5"><input type="text" id="time52" name="tue5"></td>
+                                <td id="wed5"><input type="text" id="time53" name="wed5"></td>
+                                <td id="thu5"><input type="text" id="time54" name="thu5"></td>
+                                <td id="fri5"><input type="text" id="time55" name="fri5"></td>
+                            </tr>
+                            <tr>
+                                <td id="cla6">6교시</td>
+                                <td id="mon6"><input type="text" id="time61" name="mon6"></td>
+                                <td id="tue6"><input type="text" id="time62" name="tue6"></td>
+                                <td id="wed6"><input type="text" id="time63" name="wed6"></td>
+                                <td id="thu6"><input type="text" id="time64" name="thu6"></td>
+                                <td id="fri6"><input type="text" id="time65" name="fri6"></td>
+                            </tr>
+                            <tr>
+                                <td id="cla7">7교시</td>
+                                <td id="mon7"><input type="text" id="time71" name="mon7"></td>
+                                <td id="tue7"><input type="text" id="time72" name="tue7"></td>
+                                <td id="wed7"><input type="text" id="time73" name="wed7"></td>
+                                <td id="thu7"><input type="text" id="time74" name="thu7"></td>
+                                <td id="fri7"><input type="text" id="time75" name="fri7"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <input class="btn btn-primary" type="submit" value="시간표 제출하기"> -->
+            </div>
+                <div class="signup">
+                    <!--ul 앞 버튼 없애기-->
+                    <ul type="none" class="top" style="padding-left:0px">
+                    <!--'아이디'라는 부분만 눌러도 아이디를 입력할 수 있음(label)-->
+                    <li><label for="txt1">아이디<span>  *</span></label><br><input type="text" name="username" id="txt1" placeholder=" 영문, 숫자 4~20자"></li>
+                    <li><label for="txt2">비밀번호<span>  *</span></label><br><input type="password"name="password1" id="txt2" placeholder=" 영문, 숫자 조합 6자리 이상"></li>
+                    <li><label for="txt3">비밀번호 재확인<span>  *</span></label><br><input type="password" name="password2" id="txt3"></li>
+                    <li><label for="txt4">이름<span>  *</span></label><br><input type="text" id="txt4"></li>
+                    <li><label for="txt5">닉네임<span>  *</span></label><br><input type="text" id="txt5"></li>
+                    <li><label for="txt6">휴대폰 번호</label><br><input type="text" id="txt6" placeholder=" '-' 없이 입력하세요" ></li>
+                    </ul>
+                </div>
+                <div class="under">
+                </div>
+            <input class="btn btn-primary" type="submit" value="동의하고 가입하기">
+        </form>
+    </div>
+        <div class="footer">FOOTER</div>
+    </div>
+    </div>
+</body>
+
+</html>
